@@ -3,6 +3,7 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -10,8 +11,14 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
     }
 }
 rootProject.name = "PayBack Group"
 include ':app'
 include ':core'
+include ':core-ui'
+include ':image-finder'
+include ':image-finder:image_finder_domain'
+include ':image-finder:image_finder_presentation'
+include ':image-finder:image_finder_data'
