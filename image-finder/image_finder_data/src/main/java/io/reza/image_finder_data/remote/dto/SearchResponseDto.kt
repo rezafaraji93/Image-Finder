@@ -1,7 +1,8 @@
 package io.reza.image_finder_data.remote.dto
 
+import com.squareup.moshi.Json
+
 data class SearchResponseDto(
-    val total: Int,
-    val totalHits: Int,
-    val hits: List<Hit>
+    @field:Json(name = "hits")
+    val images: List<ImageDataDto>
 )

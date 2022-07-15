@@ -65,6 +65,11 @@ dependencies {
     implementation(DaggerHilt.hiltAndroid)
     kapt(DaggerHilt.hiltCompiler)
 
+    implementation(Paging.paging)
+    implementation(Paging.composePaging)
+
+    implementation(AndroidX.datastore)
+
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.imageFinderPresentation))
@@ -86,6 +91,7 @@ dependencies {
     kapt(Room.roomCompiler)
     implementation(Room.roomKtx)
     implementation(Room.roomRuntime)
+    implementation(Room.roomPaging3)
 
     testImplementation(Testing.junit4)
     testImplementation(Testing.junitAndroidExt)

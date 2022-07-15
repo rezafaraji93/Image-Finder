@@ -10,4 +10,7 @@ dependencies {
 
     "implementation"(Coil.coilCompose)
 
+    "implementation"(Paging.paging)
+    "implementation"(Paging.composePaging)
+
 }

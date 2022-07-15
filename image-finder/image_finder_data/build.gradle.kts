@@ -6,6 +6,8 @@ dependencies {
     "implementation"(project(Modules.core))
     "implementation"(project(Modules.imageFinderDomain))
 
+    "implementation"(AndroidX.datastore)
+
     "implementation"(Retrofit.retrofit)
     "implementation"(Retrofit.okHttp)
     "implementation"(Retrofit.okHttpLoggingInterceptor)
@@ -14,6 +16,7 @@ dependencies {
     "kapt"(Room.roomCompiler)
     "implementation"(Room.roomKtx)
     "implementation"(Room.roomRuntime)
+    "implementation"(Room.roomPaging3)
 
-
+    "implementation"(Paging.paging)
 }

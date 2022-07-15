@@ -1,6 +1,6 @@
 package io.reza.image_finder_data.remote.dto
 
-data class Hit(
+data class ImageDataDto(
     val id: Int,
     val pageURL: String,
     val type: String,
