@@ -70,6 +70,8 @@ dependencies {
 
     implementation(AndroidX.datastore)
 
+    implementation(Accompanist.accompanistPlaceHolder)
+
     implementation(project(Modules.core))
     implementation(project(Modules.coreUi))
     implementation(project(Modules.imageFinderPresentation))
@@ -92,6 +94,8 @@ dependencies {
     implementation(Room.roomKtx)
     implementation(Room.roomRuntime)
     implementation(Room.roomPaging3)
+
+    implementation(Timber.timber)
 
     testImplementation(Testing.junit4)
     testImplementation(Testing.junitAndroidExt)

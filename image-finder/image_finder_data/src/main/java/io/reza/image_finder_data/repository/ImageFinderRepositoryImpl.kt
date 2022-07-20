@@ -19,12 +19,12 @@ class ImageFinderRepositoryImpl(
 ) : ImageFinderRepository {
 
     @OptIn(ExperimentalPagingApi::class)
-    override suspend fun searchImages(
+    override fun searchImages(
         query: String
     ): Flow<PagingData<ImageData>> {
-        val pagingSourceFactory = { db.imageDataDao.searchImages(query.trim().lowercase()) }
+        val pagingSourceFactory = { db.imageDataDao.searchImages(query) }
         return Pager(
-            config = PagingConfig(pageSize = 20, enablePlaceholders = true),
+            config = PagingConfig(pageSize = 20, enablePlaceholders = false, initialLoadSize = 20),
             remoteMediator = ImagesRemoteMediator(
                 query = query,
                 api = api,
@@ -35,5 +35,8 @@ class ImageFinderRepositoryImpl(
         ).flow
     }
 
+    override fun getImageData(imageId: Int): Flow<ImageData> {
+        return db.imageDataDao.getImageData(imageId)
+    }
 
 }

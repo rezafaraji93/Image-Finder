@@ -1,6 +1,5 @@
 package io.reza.image_finder_data.mediator
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -37,8 +36,7 @@ class ImagesRemoteMediator(
 
         val page = when (loadType) {
             LoadType.REFRESH -> {
-                val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
-                remoteKeys?.nextKey?.minus(1) ?: STARTING_PAGE
+                STARTING_PAGE
             }
             LoadType.PREPEND -> {
                 return MediatorResult.Success(endOfPaginationReached = true)
@@ -63,9 +61,8 @@ class ImagesRemoteMediator(
                 )
             }
 
-            val endOfPaginationReached = apiResponse.images.size < state.config.pageSize
+            val endOfPaginationReached = apiResponse.images.isEmpty()
             db.withTransaction {
-                // clear all tables in the database
                 if (loadType == LoadType.REFRESH) {
                     db.remoteKeysDao.clearRemoteKeys()
                     db.imageDataDao.clearAllImageData()
@@ -87,27 +84,10 @@ class ImagesRemoteMediator(
     }
 
     private suspend fun getRemoteKeyForLastItem(state: PagingState<Int, ImageData>): RemoteKeys? {
-
-        return state.pages.lastOrNull() { it.data.isNotEmpty() }?.data?.lastOrNull()
+        return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()
             ?.let { image ->
                 db.remoteKeysDao.remoteKeysImageId(image.remoteId)
             }
     }
 
-    private suspend fun getRemoteKeyForFirstItem(state: PagingState<Int, ImageData>): RemoteKeys? {
-        return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()
-            ?.let { imageData ->
-                db.remoteKeysDao.remoteKeysImageId(imageData.remoteId)
-            }
-    }
-
-    private suspend fun getRemoteKeyClosestToCurrentPosition(
-        state: PagingState<Int, ImageData>
-    ): RemoteKeys? {
-        return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.let { image ->
-                db.remoteKeysDao.remoteKeysImageId(image.remoteId)
-            }
-        }
-    }
 }

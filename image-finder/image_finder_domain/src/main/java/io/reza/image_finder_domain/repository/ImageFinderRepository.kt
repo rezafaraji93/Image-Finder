@@ -6,8 +6,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface ImageFinderRepository {
 
-    suspend fun searchImages(
+    fun searchImages(
         query: String,
     ): Flow<PagingData<ImageData>>
+
+    fun getImageData(imageId: Int): Flow<ImageData>
 
 }

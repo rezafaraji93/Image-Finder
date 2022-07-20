@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="error">Error</string>
+    <string name="errorText">ErrorText</string>
+    <string name="tapToRetry">Tap to retry</string>
+    <string name="tags">Tags: %s</string>
+</resources>

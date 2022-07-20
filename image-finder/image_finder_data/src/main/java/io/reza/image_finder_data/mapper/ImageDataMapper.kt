@@ -12,6 +12,8 @@ fun ImageDataDto.toImageData(): ImageData {
         previewWidth = previewWidth,
         previewHeight = previewHeight,
         largeImageURL = largeImageURL,
+        largeImageHeight = imageHeight,
+        largeImageWidth = imageWidth,
         downloads = downloads,
         likes = likes,
         comments = comments,
