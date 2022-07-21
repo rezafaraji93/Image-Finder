@@ -22,7 +22,6 @@ import coil.compose.AsyncImage
 import com.google.accompanist.placeholder.PlaceholderHighlight
 import com.google.accompanist.placeholder.material.placeholder
 import com.google.accompanist.placeholder.material.shimmer
-import io.reza.image_finder_presentation.R
 import io.reza.image_finder_presentation.image_detail_screen.component.ImageDetailTopBar
 import io.reza.image_finder_presentation.image_detail_screen.component.ImageInfoBox
 
@@ -46,7 +45,7 @@ fun ImageDetailScreen(
         } else {
             if (state.isError) {
                 Text(
-                    text = stringResource(id = R.string.detailNotFound),
+                    text = stringResource(id = io.reza.core_ui.R.string.detailNotFound),
                     modifier = Modifier.align(Alignment.Center)
                 )
             } else {

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="error">Error</string>
-    <string name="errorText">ErrorText</string>
+    <string name="errorText">Couldn\'t find any images</string>
     <string name="tapToRetry">Tap to retry</string>
     <string name="tags">Tags: %s</string>
+    <string name="search">Search</string>
+    <string name="detailNotFound">No detail found!</string>
 </resources>

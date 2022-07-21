@@ -6,7 +6,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reza.image_finder_domain.model.ImageData
-import io.reza.image_finder_domain.repository.ImageFinderRepository
+import io.reza.image_finder_domain.use_case.SearchImageUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(
-    private val repository: ImageFinderRepository
+    private val searchImageUseCase: SearchImageUseCase
 ) : ViewModel() {
 
     private val viewModelState = MutableStateFlow(SearchScreenState())
@@ -62,7 +62,7 @@ class SearchScreenViewModel @Inject constructor(
     }
 
     private fun getPagingDataFlow(searchQuery: String): Flow<PagingData<ImageData>> =
-        repository.searchImages(searchQuery).cachedIn(viewModelScope)
+        searchImageUseCase(searchQuery).cachedIn(viewModelScope)
 
     fun updateSearchBarState(isFocused: Boolean) {
         viewModelState.update {

@@ -1,6 +1,8 @@
 package io.reza.image_finder_presentation.search_screen.component
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -8,10 +10,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusManager
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
@@ -73,6 +77,12 @@ fun SearchBar(
             onTextChanged = onTextChanged,
             closeKeyboard = { focusManager.clearFocus() }
         )
+
+        CancelIcon(
+            isInSearchState = isKeyboardOpen || requestFocus,
+            onTextChanged = onTextChanged,
+            focusManager = focusManager
+        )
     }
 }
 
@@ -118,4 +128,30 @@ private fun RowScope.TextFiled(
             }
         }
     )
+}
+
+@Composable
+private fun RowScope.CancelIcon(
+    isInSearchState: Boolean,
+    onTextChanged: (text: String) -> Unit,
+    focusManager: FocusManager
+) {
+    Box(
+        modifier = Modifier
+            .padding(end = 16.dp)
+            .size(28.dp)
+    ) {
+        this@CancelIcon.AnimatedVisibility(
+            visible = isInSearchState,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            IconButton(onClick = {
+                onTextChanged("")
+                focusManager.clearFocus()
+            }) {
+                Icon(imageVector = Icons.Rounded.Close, contentDescription = "clearIcon")
+            }
+        }
+    }
 }
